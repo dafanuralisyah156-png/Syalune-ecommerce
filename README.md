@@ -134,3 +134,19 @@ Website ini mengimplementasikan fungsionalitas _frontend_ dinamis menggunakan **
 - **Event Delegation & DOM Manipulation**: Semua interaksi _click_ pada grid produk diimplementasikan menggunakan _Event Delegation_ untuk memaksimalkan efisiensi memori (hanya ada satu _event listener_ pada _wrapper_ utama).
 - **Responsive Web Design (RWD)**: Desain dibangun menggunakan Vanilla CSS Variables dan Media Queries, memastikan layout beradaptasi dengan sempurna dari layar HP (_mobile_) berukuran kecil hingga layar monitor _desktop_.
 - **Sistem Promo Code & Notifikasi**: Simulasi keranjang belanja dilengkapi dengan kalkulasi otomatis untuk pajak, ambang batas gratis ongkir, kode kupon diskon, serta menggunakan elemen DOM kustom untuk membuat notifikasi (_Toast Notification_) setiap ada interaksi berhasil.
+
+## 13. Deployment ke GitHub Pages
+Karena website ini sepenuhnya berbasis klien (_static/frontend-only_) dan tidak memerlukan *backend server* atau *database*, Anda dapat dengan mudah memublikasikannya secara online dan gratis menggunakan **GitHub Pages**.
+
+Berikut adalah panduan langkah demi langkah untuk meng-_online_-kan website Anda:
+
+1. **Buat Repository Baru**: Buka akun [GitHub](https://github.com/) Anda dan buat *repository* baru (contoh: beri nama `syalune-store`).
+2. **Unggah File Proyek**: Unggah seluruh isi file yang ada di dalam folder `v4` ini (seperti `index.html`, folder `css/`, `js/`, `images/`, dsb) ke dalam *repository* yang baru saja dibuat.
+3. **Aktifkan GitHub Pages**:
+   - Masuk ke menu **Settings** di dalam *repository* Anda.
+   - Pada panel sebelah kiri, temukan dan klik menu **Pages**.
+   - Pada bagian **Build and deployment**, pastikan pilihan *Source* diatur ke **Deploy from a branch**.
+   - Pada menu *Branch*, pilih *branch* utama Anda (biasanya bernama `main` atau `master`) dan pastikan foldernya diatur ke `/ (root)`.
+   - Klik **Save**.
+4. **Tunggu Proses Build**: GitHub akan memproses website Anda (biasanya memakan waktu sekitar 1-3 menit).
+5. **Akses Website Anda**: Setelah proses selesai, URL publik website Anda akan muncul di bagian atas halaman **Pages** (formatnya biasanya `https://<username-github>.github.io/<nama-repository>`). Website e-commerce Anda kini sudah *online* dan siap dibagikan!
