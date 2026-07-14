@@ -1,3 +1,5 @@
+[NAMA]: DAFANURALISYAH  [NIM] : 209250061 [KELAS] : ADMINISTRASI BISNIS 2/2025 [DOSEN] : Yoki Oktorian Sukardi, S.Kom., Μ.Α.Β. [ΜΑΤA KULIAH] : APLIKASI KOMPUTER IT II
+
 # Business Overview - Syalune
 
 ## Daftar Isi
