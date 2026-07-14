@@ -101,3 +101,14 @@ Terintegrasi dengan Google Analytics 4 (GA4) dengan event tracking: view_item, a
 
 **Pemanfaatan Data:**
 Produk terlaris menjadi acuan stok dan produk unggulan. Analisis funnel checkout untuk menekan abandonment. Evaluasi efektivitas sumber trafik pemasaran. Penyesuaian UI/UX berdasarkan perilaku di mobile/desktop. Retargeting (promo/diskon) untuk barang yang sering masuk keranjang tapi tak dibeli.
+
+## 10. Struktur Folder
+- `css/`: Menyimpan file stylesheet utama (`style.css`).
+- `images/`: Menyimpan aset gambar produk dan logo.
+- `js/`: Menyimpan file logika Javascript (`products.js` untuk data & fungsionalitas produk, `cart.js` untuk keranjang belanja).
+- `index.html`: Halaman Beranda utama (Home).
+- `catalog.html`: Halaman Katalog Produk dengan fitur filter dan pencarian.
+- `cart.html`: Halaman Keranjang Belanja.
+- `checkout.html`: Halaman Formulir Pemesanan dan Checkout.
+- `business.html`: Halaman Profil Bisnis & Tentang Kami.
+- `README.md`: Dokumen ikhtisar proyek ini.
