@@ -167,3 +167,19 @@ Berikut adalah panduan langkah demi langkah untuk meng-_online_-kan website Anda
    - Klik **Save**.
 4. **Tunggu Proses Build**: GitHub akan memproses website Anda (biasanya memakan waktu sekitar 1-3 menit).
 5. **Akses Website Anda**: Setelah proses selesai, URL publik website Anda akan muncul di bagian atas halaman **Pages** (formatnya biasanya `https://<username-github>.github.io/<nama-repository>`). Website e-commerce Anda kini sudah *online* dan siap dibagikan!
+
+## 14. Panduan Struktur Data Produk
+Sistem katalog pada website Syalune dikelola sepenuhnya secara dinamis berbasis data array objek (*Array of Objects*) pada file `js/products.js`. Struktur ini dirancang agar mudah dibaca oleh modul keranjang belanja maupun katalog utama.
+
+**Skema Properti Objek:**
+- `id`: String unik sebagai pengenal utama produk (contoh: `syl-w01`).
+- `name`: String nama produk fashion yang ditampilkan pada halaman.
+- `category`: Kategori busana spesifik (contoh: Outerwear Wanita, Tops Pria).
+- `gender`: Klasifikasi segmen pasar produk (`Wanita` atau `Pria`).
+- `price`: Integer harga aktif produk (dalam nilai rupiah asli).
+- `oldPrice`: Integer harga sebelum diskon, bernilai `null` jika produk tidak sedang didiskon.
+- `badge`: Label penanda promosi produk (`NEW`, `BEST`, `SALE`, atau `null`).
+- `colors` & `sizes`: Array opsi variasi warna dan ukuran yang tersedia untuk dipilih pembeli.
+
+**Implementasi Sistem:**
+Seluruh data produk dirender secara otomatis menggunakan fungsi perulangan JavaScript `map()`. Skema objek yang terstandarisasi ini memungkinkan fitur filter pencarian, pengelompokan berdasarkan gender, pengurutan harga termurah/termahal, serta kalkulasi subtotal belanja di halaman keranjang dapat berjalan dengan cepat di sisi klien (*client-side*) tanpa memerlukan pemrosesan server.
