@@ -183,3 +183,17 @@ Sistem katalog pada website Syalune dikelola sepenuhnya secara dinamis berbasis 
 
 **Implementasi Sistem:**
 Seluruh data produk dirender secara otomatis menggunakan fungsi perulangan JavaScript `map()`. Skema objek yang terstandarisasi ini memungkinkan fitur filter pencarian, pengelompokan berdasarkan gender, pengurutan harga termurah/termahal, serta kalkulasi subtotal belanja di halaman keranjang dapat berjalan dengan cepat di sisi klien (*client-side*) tanpa memerlukan pemrosesan server.
+
+## 15. Aturan Validasi Formulir Pengiriman
+Untuk menjamin akurasi data pengiriman barang dan meminimalkan kegagalan pengiriman oleh ekspedisi, halaman `checkout.html` menerapkan sistem validasi formulir yang ketat sebelum tombol pembayaran dapat diproses.
+
+**Kriteria Validasi Input:**
+- Nama Pengguna (`name`): Wajib diisi dengan panjang minimal 2 karakter.
+- Alamat Email (`email`): Menggunakan filter Regular Expression (Regex) standar alamat email valid.
+- No. Telepon (`phone`): Terdiri dari karakter angka dengan panjang berkisar antara 10 sampai 13 digit.
+- Alamat Lengkap (`address`): Wajib diisi detail lokasi minimal sepanjang 10 karakter.
+- Kode Pos (`zip`): Dikunci ketat menggunakan Regex wajib berupa 5 digit angka numerik (`^\d{5}$`).
+- Kurir Pengiriman (`courier`): Wajib memilih salah satu opsi kurir ekspedisi yang tersedia.
+
+**Mekanisme Keamanan:**
+Setiap kali tombol "Bayar" ditekan, fungsi `validateAll()` akan memvalidasi seluruh kolom input secara langsung. Jika terdapat data yang tidak memenuhi kriteria, sistem akan menambahkan kelas CSS `.invalid` untuk memberikan tanda visual merah pada kolom tersebut, menampilkan pesan kesalahan, dan memicu fitur *smooth scroll* otomatis menuju input salah pertama agar segera diperbaiki oleh pelanggan.
