@@ -112,3 +112,25 @@ Produk terlaris menjadi acuan stok dan produk unggulan. Analisis funnel checkout
 - `checkout.html`: Halaman Formulir Pemesanan dan Checkout.
 - `business.html`: Halaman Profil Bisnis & Tentang Kami.
 - `README.md`: Dokumen ikhtisar proyek ini.
+
+## 11. Cara Menjalankan Website
+Website ini dibangun menggunakan teknologi dasar web (HTML, CSS, dan Vanilla JavaScript) sehingga sangat ringan dan tidak memerlukan proses instalasi atau kompilasi (_build_) yang rumit. 
+
+Untuk menjelajahi website ini secara lokal, ikuti langkah-langkah berikut:
+1. **Unduh/Clone Folder**: Pastikan semua file *source code* (v4) sudah lengkap di perangkat Anda.
+2. **Cara Paling Praktis**: Anda cukup masuk ke dalam folder `v4` dan mengklik dua kali (_double-click_) pada file `index.html`. Halaman web akan langsung terbuka di browser default Anda.
+3. **Menggunakan Live Server (Sangat Direkomendasikan)**:
+   - Apabila Anda menggunakan _text-editor_ seperti **Visual Studio Code**, disarankan untuk menginstal ekstensi **Live Server**.
+   - Buka folder proyek di VS Code, klik kanan pada file `index.html`, lalu pilih opsi **Open with Live Server**.
+   - Cara ini akan menjalankan simulasi server lokal, sehingga website bisa berjalan lebih optimal (terutama untuk simulasi localStorage pada keranjang belanja) dan otomatis me-*refresh* tampilan jika Anda melakukan perubahan pada kode.
+
+## 12. Fitur Teknis Website
+Website ini mengimplementasikan fungsionalitas _frontend_ dinamis menggunakan **Vanilla JavaScript** tanpa bergantung pada framework eksternal. Berikut adalah fitur-fitur teknis utamanya:
+
+- **State Management Lokal (`localStorage`)**: Keranjang belanja beroperasi penuh secara _client-side_. Data keranjang (produk, jumlah, variasi warna, dan variasi ukuran) disimpan di dalam penyimpanan lokal browser (menggunakan _key_ `syalune_cart_v4`) sehingga sesi belanja tidak hilang ketika pengguna me-_refresh_ halaman.
+- **Katalog Produk Dinamis**: Render HTML untuk kartu produk dijalankan secara dinamis dari sumber data terpusat (array JavaScript di `products.js`), memungkinkan filter dan sortir berjalan dengan cepat dan mulus.
+- **Filter & Pencarian Lanjutan**: Dilengkapi fungsionalitas pencarian kata kunci _real-time_ dan sistem multi-filter (kategori spesifik, gender Pria/Wanita, pengurutan berdasarkan harga/nama/rating, hingga filter harga maksimum).
+- **Global Modal System**: Mekanisme _popup modal_ global yang dirancang efisien dan dapat diinisialisasi dari file HTML manapun untuk melihat detail suatu produk dan mengonfigurasi variasi spesifikasi (ukuran/warna) sebelum menambahkan ke keranjang.
+- **Event Delegation & DOM Manipulation**: Semua interaksi _click_ pada grid produk diimplementasikan menggunakan _Event Delegation_ untuk memaksimalkan efisiensi memori (hanya ada satu _event listener_ pada _wrapper_ utama).
+- **Responsive Web Design (RWD)**: Desain dibangun menggunakan Vanilla CSS Variables dan Media Queries, memastikan layout beradaptasi dengan sempurna dari layar HP (_mobile_) berukuran kecil hingga layar monitor _desktop_.
+- **Sistem Promo Code & Notifikasi**: Simulasi keranjang belanja dilengkapi dengan kalkulasi otomatis untuk pajak, ambang batas gratis ongkir, kode kupon diskon, serta menggunakan elemen DOM kustom untuk membuat notifikasi (_Toast Notification_) setiap ada interaksi berhasil.
