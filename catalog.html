@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katalog — Syalune Fashion</title>
+  <meta name="description" content="Katalog lengkap Syalune: Koleksi Wanita & Pria — Korean Casual, Minimalist, Streetwear. Filter kategori, harga, dan urutkan sesuai pilihanmu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .gender-tabs { display:flex; gap:.5rem; margin-bottom:1rem; }
+    .gender-tab { padding:.55rem 1.4rem; border-radius:999px; border:2px solid var(--cream-3); background:var(--white); font-size:.88rem; font-weight:700; cursor:pointer; transition:all .2s; color:var(--bark-2); }
+    .gender-tab:hover { border-color:var(--lime); color:var(--lime-dark); }
+    .gender-tab.active { background:var(--lime); border-color:var(--lime); color:var(--bark); }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-top"> FREE ONGKIR untuk pembelian di atas Rp300.000!</div>
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">Syalune<span class="brand-dot"></span></a>
+    <div class="nav-search">
+      <span class="search-icon">🔍</span>
+      <input type="search" placeholder="Cari produk..." id="nav-search" />
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="catalog.html" class="active">Katalog</a>
+      <a href="business.html">Tentang</a>
+      <a href="index.html#kontak">Kontak</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn">🛍️ Keranjang <span class="cart-badge" style="display:none">0</span></a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a> / Katalog</div>
+    <h1>Katalog Produk</h1>
+    <p>Koleksi Korean Casual, Minimalist &amp; Streetwear untuk wanita dan pria. Temukan style favoritmu!</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Gender tabs -->
+    <div class="gender-tabs" id="gender-tabs">
+      <button class="gender-tab active" data-gender="Semua">Semua</button>
+      <button class="gender-tab" data-gender="Wanita">👗 Wanita</button>
+      <button class="gender-tab" data-gender="Pria">👔 Pria</button>
+    </div>
+
+    <!-- Category chips -->
+    <div class="toolbar">
+      <div class="chips-row" id="chip-row"></div>
+      <div class="toolbar-right">
+        <input type="search" id="search" class="input" placeholder="Cari produk..." style="width:200px" />
+        <select id="sort" class="select">
+          <option value="featured">Terpopuler</option>
+          <option value="price-asc">Harga ↑</option>
+          <option value="price-desc">Harga ↓</option>
+          <option value="name">Nama A–Z</option>
+          <option value="rating">Rating Tertinggi</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-card" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div class="field">
+        <label for="price">Harga maksimal: <span id="price-label">Rp300.000</span></label>
+        <input type="range" id="price" min="100000" max="300000" step="5000" value="300000" />
+      </div>
+      <div class="field" style="display:flex;align-items:flex-end">
+        <button class="btn btn-ghost" id="reset-btn" style="height:fit-content">↺ Reset Filter</button>
+      </div>
+    </div>
+
+    <div class="catalog-meta">
+      <span id="result-count"></span>
+    </div>
+
+    <div class="product-grid" id="catalog-grid" style="grid-template-columns:repeat(4,1fr)"></div>
+    <div class="empty-state" id="empty" style="display:none">
+      <div class="empty-icon">🔍</div>
+      <h3>Tidak ada produk ditemukan</h3>
+      <p>Coba ubah kata kunci, kategori, gender, atau rentang harga.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Modal detail -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" id="modal-close" aria-label="Tutup">✕</button>
+    <div class="modal-grid" id="modal-body"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© <span id="year"></span> Syalune. Hak cipta dilindungi.</span>
+      <span><a href="index.html" style="color:var(--lime)">← Kembali ke Beranda</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+const MAX_P = 300000;
+
+function updateCartBadge() {
+  const c = Cart.count();
+  document.querySelectorAll(".cart-badge").forEach(b => { b.textContent = c; b.style.display = c > 0 ? "inline-flex" : "none"; });
+}
+let _toast;
+function showToast(msg) {
+  let t = document.querySelector(".toast");
+  if (!t) { t = document.createElement("div"); t.className = "toast"; document.body.appendChild(t); }
+  t.textContent = msg; void t.offsetWidth; t.classList.add("show");
+  clearTimeout(_toast); _toast = setTimeout(() => t.classList.remove("show"), 2800);
+}
+const tog = document.querySelector(".nav-toggle"), nls = document.querySelector(".nav-links");
+if (tog && nls) tog.addEventListener("click", () => nls.classList.toggle("open"));
+
+/* ─── State ─── */
+const params = new URLSearchParams(location.search);
+const state = {
+  search: (params.get("q") || "").toLowerCase(),
+  gender: params.get("gender") || "Semua",
+  category: "Semua",
+  maxPrice: MAX_P,
+  sort: "featured"
+};
+
+/* Pre-fill UI from URL params */
+const searchEl = document.getElementById("search");
+const navSearch = document.getElementById("nav-search");
+if (state.search) { searchEl.value = params.get("q"); navSearch.value = params.get("q"); }
+if (state.gender !== "Semua") {
+  document.querySelectorAll(".gender-tab").forEach(t => t.classList.toggle("active", t.dataset.gender === state.gender));
+}
+
+/* ─── Build category chips by gender ─── */
+function buildChips() {
+  const chipRow = document.getElementById("chip-row");
+  const cats = state.gender === "Semua"
+    ? ["Semua", ...new Set(PRODUCTS.map(p => p.category))]
+    : ["Semua", ...new Set(PRODUCTS.filter(p => p.gender === state.gender).map(p => p.category))];
+  chipRow.innerHTML = cats.map(c => `<button class="chip${c === state.category ? " active" : ""}" data-cat="${c}">${c}</button>`).join("");
+  chipRow.addEventListener("click", e => {
+    const ch = e.target.closest(".chip"); if (!ch) return;
+    chipRow.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === ch));
+    state.category = ch.dataset.cat; apply();
+  });
+}
+
+/* ─── Gender tabs ─── */
+document.getElementById("gender-tabs").addEventListener("click", e => {
+  const btn = e.target.closest(".gender-tab"); if (!btn) return;
+  document.querySelectorAll(".gender-tab").forEach(b => b.classList.toggle("active", b === btn));
+  state.gender = btn.dataset.gender;
+  state.category = "Semua";
+  buildChips();
+  apply();
+});
+
+/* ─── Other controls ─── */
+const priceEl = document.getElementById("price");
+const priceLabel = document.getElementById("price-label");
+const sortEl = document.getElementById("sort");
+const resetBtn = document.getElementById("reset-btn");
+priceEl.addEventListener("input", e => { state.maxPrice = +e.target.value; priceLabel.textContent = formatRupiah(state.maxPrice); apply(); });
+sortEl.addEventListener("change", e => { state.sort = e.target.value; apply(); });
+searchEl.addEventListener("input", e => { state.search = e.target.value.toLowerCase(); apply(); });
+navSearch.addEventListener("input", e => { state.search = e.target.value.toLowerCase(); searchEl.value = e.target.value; apply(); });
+resetBtn.addEventListener("click", () => {
+  Object.assign(state, { search: "", gender: "Semua", category: "Semua", maxPrice: MAX_P, sort: "featured" });
+  searchEl.value = ""; navSearch.value = "";
+  priceEl.value = MAX_P; priceLabel.textContent = formatRupiah(MAX_P); sortEl.value = "featured";
+  document.querySelectorAll(".gender-tab").forEach(b => b.classList.toggle("active", b.dataset.gender === "Semua"));
+  buildChips(); apply();
+});
+
+/* ─── Apply filters ─── */
+function apply() {
+  let list = PRODUCTS.filter(p => {
+    const matchGender   = state.gender === "Semua" || p.gender === state.gender;
+    const matchCat      = state.category === "Semua" || p.category === state.category;
+    const matchPrice    = p.price <= state.maxPrice;
+    const q = state.search;
+    const matchSearch   = !q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.short.toLowerCase().includes(q) || p.gender.toLowerCase().includes(q);
+    return matchGender && matchCat && matchPrice && matchSearch;
+  });
+  if (state.sort === "price-asc") list.sort((a, b) => a.price - b.price);
+  else if (state.sort === "price-desc") list.sort((a, b) => b.price - a.price);
+  else if (state.sort === "name") list.sort((a, b) => a.name.localeCompare(b.name, "id"));
+  else if (state.sort === "rating") list.sort((a, b) => b.rating - a.rating);
+  render(list);
+}
+
+function imgPath(image) { return image.replace("../images/", "images/"); }
+
+/* ─── Render ─── */
+function render(list) {
+  const grid  = document.getElementById("catalog-grid");
+  const empty = document.getElementById("empty");
+  const count = document.getElementById("result-count");
+  count.textContent = list.length === PRODUCTS.length
+    ? `Menampilkan semua ${PRODUCTS.length} produk`
+    : `Menampilkan ${list.length} dari ${PRODUCTS.length} produk`;
+  if (!list.length) { grid.innerHTML = ""; empty.style.display = "block"; return; }
+  empty.style.display = "none";
+  const tagMap = { SALE: "tag-sale", NEW: "tag-new", BEST: "tag-best" };
+  grid.innerHTML = list.map(p => {
+    const d = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+    return `
+    <article class="product-card">
+      <div class="product-thumb">
+        ${p.badge ? `<span class="product-tag ${tagMap[p.badge] || "tag-new"}">${p.badge === "BEST" ? "BEST SELLER" : p.badge}</span>` : ""}
+        <img src="${imgPath(p.image)}" alt="${p.name}" loading="lazy" />
+        <button class="wish-btn" data-wish="${p.id}">🤍</button>
+        <div class="product-card-actions">
+          <button class="btn btn-primary btn-sm btn-block" data-add="${p.id}">+ Keranjang</button>
+        </div>
+      </div>
+      <div class="product-body">
+        <span class="product-cat">${p.category.toUpperCase()}</span>
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">
+          <span class="price-now">${formatRupiah(p.price)}</span>
+          ${p.oldPrice ? `<span class="price-old">${formatRupiah(p.oldPrice)}</span><span class="price-disc">-${d}%</span>` : ""}
+        </div>
+        <div class="product-rating">
+          <span class="stars">${"★".repeat(Math.round(p.rating))}</span>
+          <span class="rating-count">(${p.reviews})</span>
+        </div>
+        ${colorDotsHTML(p.colors, 4)}
+        <button class="btn btn-ghost btn-sm" data-detail="${p.id}" style="margin-top:.5rem;width:100%">Lihat Detail</button>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ─── Grid click events ─── */
+document.getElementById("catalog-grid").addEventListener("click", e => {
+  const add  = e.target.closest("[data-add]");
+  const wish = e.target.closest("[data-wish]");
+  const det  = e.target.closest("[data-detail]");
+  if (add)  { openModal(add.dataset.add); }
+  if (wish) { wish.textContent = wish.textContent === "🤍" ? "❤️" : "🤍"; showToast("Ditambahkan ke wishlist 💚"); }
+  if (det)  { openModal(det.dataset.detail); }
+});
+
+
+/* ─── Init ─── */
+document.addEventListener("DOMContentLoaded", () => { updateCartBadge(); buildChips(); apply(); });
+document.addEventListener("cart:change", updateCartBadge);
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keranjang Belanja — Syalune</title>
+  <meta name="description" content="Keranjang belanja Syalune — review produk dan lanjutkan ke checkout." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-top"> FREE ONGKIR untuk pembelian di atas Rp300.000!</div>
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">Syalune<span class="brand-dot"></span></a>
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="catalog.html">Katalog</a>
+      <a href="business.html">Tentang</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn active">🛍️ Keranjang <span class="cart-badge" style="display:none">0</span></a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a> / <a href="catalog.html">Katalog</a> / Keranjang</div>
+    <h1>Keranjang Belanja</h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Empty state -->
+    <div id="cart-empty" style="display:none;text-align:center;padding:4rem 1rem">
+      <div style="font-size:4rem;margin-bottom:1rem">🛍️</div>
+      <h2 style="font-family:var(--sans);font-weight:800;margin-bottom:.75rem">Keranjangmu masih kosong</h2>
+      <p style="margin-bottom:1.5rem">Yuk, tambahkan outfit favoritmu dari koleksi Syalune!</p>
+      <a href="catalog.html" class="btn btn-primary">Mulai Belanja →</a>
+    </div>
+
+    <!-- Cart layout -->
+    <div class="cart-layout" id="cart-main" style="display:none">
+      <div>
+        <div id="cart-items"></div>
+      </div>
+      <div class="summary">
+        <h3>Ringkasan Pesanan</h3>
+        <div class="summary-row"><span>Subtotal</span><span id="co-sub">Rp0</span></div>
+        <div class="summary-row"><span>Ongkir</span><span id="co-ship">Gratis</span></div>
+        <div class="summary-row"><span>Diskon</span><span id="co-disc" style="color:var(--success)">-Rp0</span></div>
+        <div class="summary-row total"><span>Total</span><span id="co-total">Rp0</span></div>
+        <div class="promo-input">
+          <input type="text" id="promo-code" placeholder="Kode promo" maxlength="20" />
+          <button class="btn btn-ghost btn-sm" id="promo-apply">Pakai</button>
+        </div>
+        <div class="promo-note" id="promo-note" style="display:none"></div>
+        <a href="checkout.html" class="btn btn-primary btn-block" style="margin-top:1rem">Lanjut ke Checkout →</a>
+        <a href="catalog.html" class="btn btn-ghost btn-block" style="margin-top:.5rem">← Lanjutkan Belanja</a>
+        <div style="text-align:center;margin-top:1rem;font-size:.75rem;color:var(--muted)">🔒 Transaki aman &amp; terenkripsi</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Rekomendasi -->
+<section class="section lime-bg" id="rec-section" style="display:none">
+  <div class="container">
+    <h2 style="font-family:var(--sans);font-weight:800;font-size:1.4rem;margin-bottom:1.5rem">Mungkin kamu juga suka</h2>
+    <div class="product-grid" id="rec-grid" style="grid-template-columns:repeat(4,1fr)"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© <span id="year"></span> Syalune. Hak cipta dilindungi.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Load scripts FIRST — no CART_KEY redeclaration in inline script -->
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+/* ── Helpers ── */
+document.getElementById("year").textContent = new Date().getFullYear();
+const tog = document.querySelector(".nav-toggle"), nls = document.querySelector(".nav-links");
+if (tog && nls) tog.addEventListener("click", () => nls.classList.toggle("open"));
+
+function updateCartBadge() {
+  const c = Cart.count();
+  document.querySelectorAll(".cart-badge").forEach(b => {
+    b.textContent = c;
+    b.style.display = c > 0 ? "inline-flex" : "none";
+  });
+}
+
+let _toast;
+function showToast(msg) {
+  let t = document.querySelector(".toast");
+  if (!t) { t = document.createElement("div"); t.className = "toast"; document.body.appendChild(t); }
+  t.textContent = msg; void t.offsetWidth; t.classList.add("show");
+  clearTimeout(_toast); _toast = setTimeout(() => t.classList.remove("show"), 2800);
+}
+
+/* Promo codes */
+let promoDiscount = 0;
+const PROMOS = { "SYALUNE10": 0.10, "NEWMEMBER": 0.15, "HEMAT20": 0.20 };
+
+function imgPath(img) { return img.replace("../images/", "images/"); }
+
+/* ── Main render function ── */
+function renderCart() {
+  const items = Cart.all();           // [{id, qty}, ...]
+  const emptyEl = document.getElementById("cart-empty");
+  const mainEl  = document.getElementById("cart-main");
+  const recSec  = document.getElementById("rec-section");
+  const itemsEl = document.getElementById("cart-items");
+
+  if (!items || !items.length) {
+    emptyEl.style.display = "block";
+    mainEl.style.display  = "none";
+    recSec.style.display  = "none";
+    return;
+  }
+
+  emptyEl.style.display = "none";
+  mainEl.style.display  = "grid";
+
+  /* Build cart items */
+  let subtotal = 0;
+  const rows = items.map(item => {
+    const p = getProductById(item.id);
+    if (!p) return "";
+    const cartId = item.cartId || item.id;
+    const lineTotal = p.price * item.qty;
+    subtotal += lineTotal;
+    return `
+    <div class="cart-item" data-id="${cartId}">
+      <img src="${imgPath(p.image)}" alt="${p.name}" />
+      <div class="cart-item-body">
+        <div class="product-cat">${p.category}</div>
+        <h3>${p.name}</h3>
+        <div style="font-size:.8rem;color:var(--muted);margin-bottom:.4rem">
+          Ukuran: <strong>${item.size || "-"}</strong> &nbsp;·&nbsp; Warna: <strong>${item.color || "-"}</strong>
+        </div>
+        <div class="price">${formatRupiah(p.price)}</div>
+        <div class="cart-item-footer">
+          <div class="qty">
+            <button data-minus="${cartId}">−</button>
+            <span>${item.qty}</span>
+            <button data-plus-id="${p.id}" data-plus-size="${item.size}" data-plus-color="${item.color}">+</button>
+          </div>
+          <span class="cart-subtotal">${formatRupiah(lineTotal)}</span>
+          <button class="link-remove" data-remove="${cartId}">Hapus</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+  itemsEl.innerHTML = rows;
+
+  /* Summary */
+  const shipping = subtotal >= 300000 ? 0 : 15000;
+  const disc     = Math.round(subtotal * promoDiscount);
+  const total    = subtotal + shipping - disc;
+
+  document.getElementById("co-sub").textContent   = formatRupiah(subtotal);
+  document.getElementById("co-ship").textContent  = shipping === 0 ? "✅ Gratis" : formatRupiah(shipping);
+  document.getElementById("co-disc").textContent  = disc > 0 ? `−${formatRupiah(disc)}` : "−Rp0";
+  document.getElementById("co-total").textContent = formatRupiah(total);
+
+  /* Recommendations — products not in cart */
+  const inCart = items.map(i => i.id);
+  const recs   = PRODUCTS.filter(p => !inCart.includes(p.id)).slice(0, 4);
+  if (recs.length) {
+    recSec.style.display = "block";
+    const tagMap = { SALE: "tag-sale", NEW: "tag-new", BEST: "tag-best" };
+    document.getElementById("rec-grid").innerHTML = recs.map(p => `
+      <article class="product-card">
+        <div class="product-thumb">
+          ${p.badge ? `<span class="product-tag ${tagMap[p.badge]||"tag-new"}">${p.badge==="BEST"?"BEST SELLER":p.badge}</span>` : ""}
+          <img src="${imgPath(p.image)}" alt="${p.name}" loading="lazy" />
+          <div class="product-card-actions">
+            <button class="btn btn-primary btn-sm btn-block" data-rec-add="${p.id}">+ Keranjang</button>
+          </div>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">${p.category}</span>
+          <div class="product-name">${p.name}</div>
+          <div class="product-price"><span class="price-now">${formatRupiah(p.price)}</span></div>
+          ${colorDotsHTML(p.colors)}
+        </div>
+      </article>`).join("");
+    document.getElementById("rec-grid").addEventListener("click", e => {
+      const btn = e.target.closest("[data-rec-add]");
+      if (!btn) return;
+      const p = getProductById(btn.dataset.recAdd);
+      if (p) { openModal(p.id); }
+    }, { once: true });
+  } else {
+    recSec.style.display = "none";
+  }
+}
+
+/* ── Cart item event delegation ── */
+document.getElementById("cart-items").addEventListener("click", e => {
+  const plus   = e.target.closest("[data-plus-id]");
+  const minus  = e.target.closest("[data-minus]");
+  const remove = e.target.closest("[data-remove]");
+
+  if (plus)   { Cart.add(plus.dataset.plusId, 1, plus.dataset.plusSize, plus.dataset.plusColor); }
+  if (minus)  { Cart.remove(minus.dataset.minus);   }
+  if (remove) {
+    Cart.removeAll(remove.dataset.remove);
+    showToast("Produk dihapus dari keranjang");
+  }
+  /* renderCart() akan otomatis dipanggil oleh cart:change event */
+});
+
+/* ── Promo code ── */
+document.getElementById("promo-apply").addEventListener("click", () => {
+  const raw  = document.getElementById("promo-code").value.trim().toUpperCase();
+  const note = document.getElementById("promo-note");
+  if (PROMOS[raw]) {
+    promoDiscount = PROMOS[raw];
+    note.style.display = "block";
+    note.style.color   = "var(--success)";
+    note.textContent   = `✅ Kode "${raw}" berhasil! Diskon ${promoDiscount * 100}%`;
+    showToast(`Diskon ${promoDiscount * 100}% berhasil diterapkan 🎉`);
+    renderCart();
+  } else {
+    note.style.display = "block";
+    note.style.color   = "var(--danger)";
+    note.textContent   = `❌ Kode "${raw}" tidak valid atau sudah kadaluarsa.`;
+  }
+});
+
+/* ── Init & reactive update ── */
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartBadge();
+  renderCart();
+});
+document.addEventListener("cart:change", () => {
+  updateCartBadge();
+  renderCart();
+});
+</script>
+</body>
+</html>

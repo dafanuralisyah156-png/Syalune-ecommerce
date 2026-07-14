@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Syalune</title>
+  <meta name="description" content="Checkout Syalune — isi data pengiriman dan pilih metode pembayaran." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-top">🔒 Checkout Aman — Semua transaksi terenkripsi SSL</div>
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">Syalune<span class="brand-dot"></span></a>
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="catalog.html">Katalog</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn">← Kembali ke Keranjang</a>
+    </div>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a> / <a href="cart.html">Keranjang</a> / Checkout</div>
+    <h1>Checkout</h1>
+    <p>Lengkapi data pengiriman dan pilih metode pembayaran.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="checkout-layout" id="checkout-layout">
+      <!-- Form -->
+      <div>
+        <!-- Data Penerima -->
+        <div class="form-card">
+          <h3>📦 Data Pengiriman</h3>
+          <form id="checkout-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fname">Nama Depan *</label>
+                <input class="input" type="text" id="fname" placeholder="Nama depan" required />
+                <span class="error-msg" id="err-fname"></span>
+              </div>
+              <div class="form-group">
+                <label for="lname">Nama Belakang *</label>
+                <input class="input" type="text" id="lname" placeholder="Nama belakang" required />
+                <span class="error-msg" id="err-lname"></span>
+              </div>
+              <div class="form-group full">
+                <label for="email">Email *</label>
+                <input class="input" type="email" id="email" placeholder="email@kamu.com" required />
+                <span class="error-msg" id="err-email"></span>
+              </div>
+              <div class="form-group full">
+                <label for="phone">No. Telepon / WhatsApp *</label>
+                <input class="input" type="tel" id="phone" placeholder="08xxxxxxxxxx" required />
+                <span class="error-msg" id="err-phone"></span>
+              </div>
+              <div class="form-group full">
+                <label for="address">Alamat Lengkap *</label>
+                <textarea class="input" id="address" rows="3" placeholder="Jalan, RT/RW, No. Rumah..." required></textarea>
+                <span class="error-msg" id="err-address"></span>
+              </div>
+              <div class="form-group">
+                <label for="city">Kota / Kabupaten *</label>
+                <input class="input" type="text" id="city" placeholder="Jakarta Selatan" required />
+                <span class="error-msg" id="err-city"></span>
+              </div>
+              <div class="form-group">
+                <label for="zip">Kode Pos *</label>
+                <input class="input" type="text" id="zip" placeholder="12345" required maxlength="5" />
+                <span class="error-msg" id="err-zip"></span>
+              </div>
+              <div class="form-group">
+                <label for="province">Provinsi *</label>
+                <select class="select" id="province" required>
+                  <option value="">-- Pilih Provinsi --</option>
+                  <option>DKI Jakarta</option><option>Jawa Barat</option><option>Jawa Tengah</option>
+                  <option>Jawa Timur</option><option>Banten</option><option>Bali</option>
+                  <option>Sumatera Utara</option><option>Sulawesi Selatan</option><option>Kalimantan Timur</option>
+                  <option>Papua</option><option>Lainnya</option>
+                </select>
+                <span class="error-msg" id="err-province"></span>
+              </div>
+              <div class="form-group">
+                <label for="courier">Kurir Pengiriman *</label>
+                <select class="select" id="courier" required>
+                  <option value="">-- Pilih Kurir --</option>
+                  <option>JNE REG (2–3 hari)</option>
+                  <option>JNE YES (1–2 hari)</option>
+                  <option>J&T Express (2–3 hari)</option>
+                  <option>SiCepat REG (2–4 hari)</option>
+                  <option>Anteraja (1–3 hari)</option>
+                </select>
+                <span class="error-msg" id="err-courier"></span>
+              </div>
+              <div class="form-group full">
+                <label for="notes">Catatan (opsional)</label>
+                <textarea class="input" id="notes" rows="2" placeholder="Instruksi khusus untuk kurir, warna/ukuran pilihan, dll..."></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Pembayaran -->
+        <div class="form-card">
+          <h3>💳 Metode Pembayaran</h3>
+          <div class="pay-methods" id="pay-methods">
+            <label class="pay-option selected">
+              <input type="radio" name="pay" value="transfer" checked />
+              <span>🏦</span>
+              <div><div class="pay-name">Transfer Bank</div><div class="pay-desc">BCA · Mandiri · BNI · BRI</div></div>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="pay" value="gopay" />
+              <span>💚</span>
+              <div><div class="pay-name">GoPay</div><div class="pay-desc">Dompet digital Gojek</div></div>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="pay" value="ovo" />
+              <span>💜</span>
+              <div><div class="pay-name">OVO</div><div class="pay-desc">Dompet digital OVO</div></div>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="pay" value="qris" />
+              <span>📱</span>
+              <div><div class="pay-name">QRIS</div><div class="pay-desc">Scan QR dari semua bank &amp; e-wallet</div></div>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="pay" value="cod" />
+              <span>💵</span>
+              <div><div class="pay-name">COD (Bayar di Tempat)</div><div class="pay-desc">Tersedia untuk area tertentu</div></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div>
+        <div class="summary">
+          <h3>Ringkasan Pesanan</h3>
+          <div id="order-items" style="border-bottom:1px solid var(--cream-3);padding-bottom:.75rem;margin-bottom:.75rem"></div>
+          <div class="summary-row"><span>Subtotal</span><span id="co-sub"></span></div>
+          <div class="summary-row"><span>Ongkir</span><span id="co-ship">Gratis ✅</span></div>
+          <div class="summary-row total"><span>Total</span><span id="co-total"></span></div>
+          <button class="btn btn-primary btn-block" id="pay-btn" style="margin-top:1.25rem">Bayar Sekarang 🔒</button>
+          <div style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:.75rem">🔒 Transaksi aman · SSL Encrypted</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Payment overlay -->
+<div class="pay-overlay" id="pay-overlay">
+  <div class="pay-box" id="pay-box">
+    <div class="spinner" id="spinner"></div>
+    <div id="pay-icon" style="display:none" class="success-icon">✓</div>
+    <h3 id="pay-title" style="font-family:var(--sans);font-weight:800;margin-bottom:.5rem">Memproses Pembayaran...</h3>
+    <p id="pay-msg" style="color:var(--bark-2);font-size:.9rem">Harap tunggu, sedang memverifikasi pembayaranmu.</p>
+    <div id="order-id-box" style="display:none">
+      <p class="order-id" id="order-id"></p>
+      <p style="font-size:.82rem;color:var(--muted)">Simpan nomor pesanan ini sebagai bukti.</p>
+      <a href="index.html" class="btn btn-primary" style="margin-top:1.25rem">Kembali ke Beranda</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><div class="container"><div class="footer-bottom" style="border-top:none;padding-top:0"><span>© <span id="year"></span> Syalune</span></div></div></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+/* NOTE: CART_KEY already defined in cart.js — do NOT redeclare here */
+
+function imgPath(img) { return img.replace("../images/","images/"); }
+
+/* ── Render order summary sidebar ── */
+function renderOrderSummary() {
+  const items = Cart.all();
+  if (!items.length) { window.location.href = "cart.html"; return; }
+  let sub = 0;
+  document.getElementById("order-items").innerHTML = items.map(it => {
+    const p = getProductById(it.id); if (!p) return "";
+    sub += p.price * it.qty;
+    return `<div style="display:flex;gap:.75rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--cream-3)">
+      <img src="${imgPath(p.image)}" style="width:52px;height:60px;object-fit:cover;border-radius:var(--r);flex-shrink:0" />
+      <div style="flex:1;min-width:0">
+        <div style="font-size:.85rem;font-weight:700;color:var(--bark);line-height:1.3">${p.name}</div>
+        <div style="font-size:.75rem;color:var(--muted);margin-top:2px">${p.category} · ×${it.qty}</div>
+        <div style="font-size:.75rem;color:var(--muted);margin-top:2px">Ukuran: <strong>${it.size || "-"}</strong> · Warna: <strong>${it.color || "-"}</strong></div>
+      </div>
+      <div style="font-size:.9rem;font-weight:800;color:var(--bark);white-space:nowrap">${formatRupiah(p.price * it.qty)}</div>
+    </div>`;
+  }).join("");
+  const ship = sub >= 300000 ? 0 : 15000;
+  document.getElementById("co-sub").textContent   = formatRupiah(sub);
+  document.getElementById("co-ship").textContent  = ship === 0 ? "Gratis ✅" : formatRupiah(ship);
+  document.getElementById("co-total").textContent = formatRupiah(sub + ship);
+}
+
+/* ── Payment method toggle ── */
+document.getElementById("pay-methods").addEventListener("change", e => {
+  if (e.target.type !== "radio") return;
+  document.querySelectorAll(".pay-option").forEach(o =>
+    o.classList.toggle("selected", o.querySelector("input") === e.target)
+  );
+});
+
+/* ── Form validation ── */
+const vd = {
+  fname:    v => v.trim().length >= 2,
+  lname:    v => v.trim().length >= 2,
+  email:    v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+  phone:    v => /^(08|\+628)\d{7,11}$/.test(v.replace(/\s/g,"")),
+  address:  v => v.trim().length >= 10,
+  city:     v => v.trim().length >= 2,
+  zip:      v => /^\d{5}$/.test(v),
+  province: v => v !== "",
+  courier:  v => v !== "",
+};
+const msgs = {
+  fname:    "Nama depan minimal 2 karakter.",
+  lname:    "Nama belakang minimal 2 karakter.",
+  email:    "Format email tidak valid.",
+  phone:    "Nomor HP tidak valid (08xx...).",
+  address:  "Alamat minimal 10 karakter.",
+  city:     "Kota tidak boleh kosong.",
+  zip:      "Kode pos harus 5 digit angka.",
+  province: "Pilih provinsi terlebih dahulu.",
+  courier:  "Pilih kurir pengiriman.",
+};
+
+function validateAll() {
+  let ok = true;
+  Object.keys(vd).forEach(id => {
+    const el  = document.getElementById(id);
+    const err = document.getElementById("err-" + id);
+    if (!el) return;
+    const pass = vd[id](el.value);
+    el.classList.toggle("invalid", !pass);
+    if (err) err.textContent = pass ? "" : msgs[id];
+    if (!pass) ok = false;
+  });
+  return ok;
+}
+
+document.getElementById("pay-btn").addEventListener("click", () => {
+  if (!validateAll()) {
+    document.querySelector(".input.invalid")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  document.getElementById("pay-overlay").classList.add("open");
+  setTimeout(() => {
+    document.getElementById("spinner").style.display   = "none";
+    document.getElementById("pay-icon").style.display  = "flex";
+    document.getElementById("pay-title").textContent   = "Pembayaran Berhasil! 🎉";
+    document.getElementById("pay-msg").textContent     = "Terima kasih! Pesananmu sedang diproses dan akan segera dikirim.";
+    const oid = "SYL-" + Date.now().toString(36).toUpperCase();
+    document.getElementById("order-id").textContent    = oid;
+    document.getElementById("order-id-box").style.display = "block";
+    Cart.clear();
+    if (typeof gtag === "function") gtag("event", "purchase", { transaction_id: oid });
+  }, 2200);
+});
+
+/* ── Init ── */
+document.addEventListener("DOMContentLoaded", renderOrderSummary);
+</script>
+</body>
+</html>

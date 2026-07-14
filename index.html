@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Syalune — Shine in Every Style, Comfort in Every Step</title>
+  <meta name="description" content="Syalune — toko fashion online koleksi Korean Casual, Minimalist, dan Streetwear. Temukan outfit favoritmu dengan kualitas terbaik dan harga terjangkau." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Extra styles for new sections ── */
+    .cat-card-section {
+      background: var(--cream-2);
+      padding: var(--sp8) 0;
+    }
+    .cat-section-head {
+      text-align: center;
+      margin-bottom: var(--sp6);
+    }
+    .cat-section-head .eyebrow {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--lime-dark);
+      margin-bottom: var(--sp3);
+    }
+    .cat-section-head h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--bark);
+      margin-bottom: var(--sp2);
+    }
+    .cat-section-head p { color: var(--bark-2); max-width: 500px; margin: 0 auto; }
+
+    .cat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp4);
+    }
+    .cat-feature-card {
+      background: var(--white);
+      border: 1.5px solid var(--cream-3);
+      border-radius: var(--r-lg);
+      padding: var(--sp6) var(--sp5) var(--sp5);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--t);
+      text-decoration: none;
+      display: block;
+    }
+    .cat-feature-card:hover {
+      border-color: var(--lime);
+      box-shadow: var(--sh-md);
+      transform: translateY(-4px);
+      background: var(--lime-faint);
+    }
+    .cat-feature-card .cat-icon {
+      font-size: 2.8rem;
+      margin-bottom: var(--sp3);
+      display: block;
+    }
+    .cat-feature-card h3 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--bark);
+      margin-bottom: var(--sp2);
+    }
+    .cat-feature-card p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* Brand story section */
+    .brand-story {
+      padding: var(--sp8) 0;
+      background: var(--cream);
+    }
+    .brand-story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp7);
+      align-items: center;
+    }
+    .brand-story-content { }
+    .brand-story-content .tag-eyebrow {
+      display: inline-block;
+      background: var(--lime-faint);
+      border: 1px solid var(--lime-light);
+      color: var(--lime-dark);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: var(--r-pill);
+      margin-bottom: var(--sp4);
+    }
+    .brand-story-content h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.2;
+      color: var(--bark);
+      margin-bottom: var(--sp4);
+    }
+    .brand-story-content p {
+      color: var(--bark-2);
+      line-height: 1.8;
+      margin-bottom: var(--sp3);
+      font-size: .96rem;
+    }
+    .brand-story-content p strong { color: var(--bark); }
+    .brand-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp2);
+      margin: var(--sp4) 0;
+    }
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--cream-2);
+      border: 1px solid var(--cream-3);
+      border-radius: var(--r-pill);
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--bark-2);
+      padding: 5px 14px;
+    }
+    .brand-story-image {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh-lg);
+      aspect-ratio: 4/5;
+    }
+    .brand-story-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    /* Gender tabs on homepage */
+    .gender-tabs {
+      display: flex;
+      gap: var(--sp2);
+      margin-bottom: var(--sp5);
+    }
+    .gender-tab {
+      padding: .6rem 1.5rem;
+      border-radius: var(--r-pill);
+      border: 2px solid var(--cream-3);
+      background: var(--white);
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--t);
+      color: var(--bark-2);
+    }
+    .gender-tab:hover { border-color: var(--lime); color: var(--lime-dark); }
+    .gender-tab.active { background: var(--lime); border-color: var(--lime); color: var(--bark); }
+
+    @media (max-width: 820px) {
+      .cat-cards-grid { grid-template-columns: 1fr; }
+      .brand-story-grid { grid-template-columns: 1fr; }
+      .brand-story-image { aspect-ratio: 16/9; order: -1; }
+    }
+    @media (max-width: 540px) {
+      .cat-cards-grid { grid-template-columns: 1fr 1fr; }
+      .cat-cards-grid .cat-feature-card:last-child { grid-column: 1/-1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Navbar ─── -->
+<header class="navbar">
+  <div class="nav-top"> FREE ONGKIR untuk pembelian di atas Rp300.000 — Berlaku seluruh Indonesia!</div>
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">Syalune<span class="brand-dot"></span></a>
+
+    <div class="nav-search">
+      <span class="search-icon">🔍</span>
+      <input type="search" placeholder="Cari produk, kategori..." id="hero-search" />
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html" class="active">Beranda</a>
+      <a href="catalog.html">Katalog</a>
+      <a href="business.html">Tentang</a>
+      <a href="index.html#kontak">Kontak</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn">
+        🛍️ Keranjang <span class="cart-badge" style="display:none">0</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="hero-swiper">
+    <div class="hero-slide">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Korean Casual · Minimalist · Streetwear</div>
+        <h1>Shine in Every Style,<br /><em>Comfort in Every Step.</em></h1>
+        <p>setiap orang berhak tampil bersinar dengan gaya berpakaian yang mencerminkan kepribadian mereka. Fashion bukan hanya tentang mengikuti tren, tetapi juga tentang bagaimana seseorang merasa nyaman dan percaya diri saat mengenakan pakaian pilihannya.</p>
+        <div class="hero-cta">
+          <a href="catalog.html" class="btn btn-primary">Belanja Sekarang →</a>
+          <a href="business.html" class="btn btn-outline">Tentang Syalune</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item">
+            <strong>10.000+</strong>Pelanggan Puas
+          </div>
+          <div class="hero-trust-item">
+            <strong>4.8★</strong>Rating Rata-rata
+          </div>
+          <div class="hero-trust-item">
+            <strong>2–3 Hari</strong>Pengiriman Cepat
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="images/hero.jpg" alt="Syalune — Korean Casual Fashion Collection" />
+        <div class="hero-promo">
+          <div class="promo-pct">30%</div>
+          <p> koleksi baru<br />minggu ini</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Ticker ─── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Korean Casual <span class="sep">✦</span></span>
+    <span>Minimalist Style <span class="sep">✦</span></span>
+    <span>Streetwear Collection <span class="sep">✦</span></span>
+    <span>Free Ongkir 300K+ <span class="sep">✦</span></span>
+    <span>New Arrivals <span class="sep">✦</span></span>
+    <span>Quality First <span class="sep">✦</span></span>
+    <span>Comfort in Every Step <span class="sep">✦</span></span>
+    <span>Shine in Every Style <span class="sep">✦</span></span>
+    <span>Korean Casual <span class="sep">✦</span></span>
+    <span>Minimalist Style <span class="sep">✦</span></span>
+    <span>Streetwear Collection <span class="sep">✦</span></span>
+    <span>Free Ongkir 300K+ <span class="sep">✦</span></span>
+    <span>New Arrivals <span class="sep">✦</span></span>
+    <span>Quality First <span class="sep">✦</span></span>
+    <span>Comfort in Every Step <span class="sep">✦</span></span>
+    <span>Shine in Every Style <span class="sep">✦</span></span>
+  </div>
+</div>
+
+<!-- ─── KATEGORI "Temukan Gayamu" ─── -->
+<section class="cat-card-section">
+  <div class="container">
+    <div class="cat-section-head">
+      <div class="eyebrow">BELANJA PER KATEGORI</div>
+      <h2>Temukan Gayamu</h2>
+      <p>Dari koleksi wanita Korean-style yang feminin hingga streetwear pria yang edgy — semua ada di Syalune.</p>
+    </div>
+    <div class="cat-cards-grid reveal">
+      <a href="catalog.html?gender=Wanita" class="cat-feature-card">
+        <span class="cat-icon">👗</span>
+        <h3>Koleksi Wanita</h3>
+        <p>Cardigan tweed, midi skirt, puff sleeve blouse, sundress, hingga cargo skirt bergaya Korean Fashion.</p>
+      </a>
+      <a href="catalog.html?gender=Pria" class="cat-feature-card">
+        <span class="cat-icon">👔</span>
+        <h3>Koleksi Pria</h3>
+        <p>Boxy shirt, corduroy pants, knit vest, varsity jacket, dan hoodie oversize bergaya Korean Streetwear.</p>
+      </a>
+      <a href="catalog.html" class="cat-feature-card">
+        <span class="cat-icon">🌟</span>
+        <h3>New Arrivals & Sale</h3>
+        <p>Koleksi terbaru dan promo spesial pilihan — update setiap minggu untuk tampilan yang selalu fresh.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Featured Products ─── -->
+<section class="section">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem">
+      <div>
+        <h2 style="font-family:var(--sans);font-weight:800;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0.2rem">Koleksi Unggulan</h2>
+        <p style="font-size:.9rem">Produk terfavorit pelanggan kami — pilihan terbaik dari koleksi wanita &amp; pria.</p>
+      </div>
+      <a href="catalog.html" class="btn btn-ghost">Lihat Semua Produk →</a>
+    </div>
+
+    <!-- Gender tabs -->
+    <div class="gender-tabs" id="gender-tabs">
+      <button class="gender-tab active" data-gender="Semua">Semua</button>
+      <button class="gender-tab" data-gender="Wanita">👗 Wanita</button>
+      <button class="gender-tab" data-gender="Pria">👔 Pria</button>
+    </div>
+
+    <div class="product-grid reveal" id="home-product-grid"></div>
+
+    <div style="text-align:center;margin-top:2rem">
+      <a href="catalog.html" class="btn btn-outline">Lihat Semua Produk →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Brand Story / Tentang Syalune ─── -->
+<section class="brand-story" id="tentang">
+  <div class="container reveal">
+    <div class="brand-story-grid">
+      <div class="brand-story-content">
+        <div class="tag-eyebrow">Tentang Syalune</div>
+        <h2>Fashion yang Mencerminkan<br />Kepribadianmu</h2>
+        <p>Selamat datang di <strong>Syalune</strong>, toko fashion online yang menghadirkan berbagai koleksi pakaian pria dan wanita dengan konsep <strong>Korean Casual, Minimalist</strong>, dan <strong>Streetwear</strong>.</p>
+        <p>Kami percaya bahwa fashion adalah cara untuk mengekspresikan diri sekaligus meningkatkan rasa percaya diri dalam menjalani aktivitas sehari-hari. Setiap produk dipilih dengan cermat berdasarkan kualitas bahan, kenyamanan, serta desain yang mengikuti perkembangan tren fashion terkini.</p>
+        <p>Mulai dari cardigan, blouse, dress, rok, kemeja, hoodie, celana, hingga jaket — seluruh koleksi kami dirancang agar mudah dipadukan sehingga cocok untuk berbagai kesempatan, baik formal maupun kasual.</p>
+        <div class="brand-badges">
+          <span class="brand-badge">🌿 Korean Style</span>
+          <span class="brand-badge">✨ Minimalist</span>
+          <span class="brand-badge">🔥 Streetwear</span>
+          <span class="brand-badge">🚚 Fast Delivery</span>
+        </div>
+        <a href="business.html" class="btn btn-primary" style="width:fit-content;margin-top:.5rem">Selengkapnya tentang Kami</a>
+      </div>
+      <div class="brand-story-image">
+        <img src="images/hero.jpg" alt="Syalune fashion collection" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Keunggulan ─── -->
+<section class="section lime-bg">
+  <div class="container">
+    <h2 style="font-family:var(--sans);font-weight:800;text-align:center;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:2.5rem">Mengapa Pilih Syalune?</h2>
+    <div class="feature-row reveal">
+      <div class="feature-item">
+        <span class="feature-icon">✅</span>
+        <h4>Kurasi Ketat</h4>
+        <p>Setiap produk melalui proses seleksi kualitas bahan dan desain yang teliti sebelum ditampilkan.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🚚</span>
+        <h4>Pengiriman Cepat</h4>
+        <p>Dikemas 1×24 jam, dikirim ke seluruh Indonesia via JNE, J&T, SiCepat, dan Anteraja.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">↩️</span>
+        <h4>Mudah Return</h4>
+        <p>Barang tidak sesuai? Proses return &amp; tukar mudah dalam 7 hari setelah barang diterima.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💬</span>
+        <h4>CS Responsif</h4>
+        <p>Customer service siap membantu via WhatsApp &amp; chat setiap hari pukul 08.00–21.00 WIB.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Banner Split ─── -->
+<section class="section-sm">
+  <div class="container reveal">
+    <div class="banner-split">
+      <div class="banner-img">
+        <img src="images/banner2.jpg" alt="Syalune Collection" />
+      </div>
+      <div class="banner-content">
+        <div style="display:inline-block;background:rgba(46,42,36,.12);border-radius:999px;padding:4px 14px;font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:0.5rem">New Collection</div>
+        <h2 style="color:var(--bark)">Style yang Cermin<br />Kepribadianmu</h2>
+        <p>Dengan pilihan ukuran yang beragam, warna yang menarik, serta harga yang terjangkau, Syalune hadir untuk memenuhi kebutuhan fashion masyarakat modern yang mengutamakan gaya dan kenyamanan.</p>
+        <a href="catalog.html" class="btn btn-outline" style="width:fit-content;border-color:var(--bark)">Jelajahi Koleksi</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Newsletter ─── -->
+<section class="section" id="kontak" style="background:var(--bark)">
+  <div class="container" style="text-align:center;max-width:560px">
+    <p style="color:var(--lime);font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.75rem">NEWSLETTER</p>
+    <h2 style="font-family:var(--sans);font-weight:800;color:var(--cream);font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:.75rem">Dapatkan Diskon 10%</h2>
+    <p style="color:rgba(250,248,243,.65);margin-bottom:1.5rem">Jadilah yang pertama tahu koleksi baru, promo eksklusif, dan style tips dari Syalune.</p>
+    <form style="display:flex;gap:.75rem;max-width:420px;margin:0 auto" onsubmit="event.preventDefault();this.reset();showToast('Berhasil! Kode diskon dikirim ke emailmu 🎉')">
+      <input type="email" placeholder="email@kamu.com" required style="flex:1;padding:.75rem 1.25rem;border-radius:999px;border:1.5px solid rgba(175,208,110,.3);background:rgba(250,248,243,.08);color:var(--cream);font-size:.9rem" />
+      <button class="btn btn-primary" type="submit" style="white-space:nowrap">Daftar</button>
+    </form>
+    <p style="font-size:.75rem;color:rgba(250,248,243,.35);margin-top:.75rem">Tanpa spam. Unsubscribe kapan saja.</p>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Syalune<span class="footer-dot">.</span></div>
+        <p>Fashion online untuk tampil bersinar setiap hari — Korean Casual, Minimalist &amp; Streetwear dengan kualitas terbaik dan harga terjangkau.</p>
+        <div class="social-row">
+          <a href="index.html" class="social-btn" aria-label="Beranda">📷</a>
+          <a href="catalog.html" class="social-btn" aria-label="Katalog">🛍️</a>
+          <a href="business.html" class="social-btn" aria-label="Tentang">📖</a>
+          <a href="cart.html" class="social-btn" aria-label="Keranjang">🛒</a>
+        </div>
+      </div>
+      <div>
+        <h4>Produk</h4>
+        <ul>
+          <li><a href="catalog.html">Semua Produk</a></li>
+          <li><a href="catalog.html?gender=Wanita">Koleksi Wanita</a></li>
+          <li><a href="catalog.html?gender=Pria">Koleksi Pria</a></li>
+          <li><a href="catalog.html">New Arrivals</a></li>
+          <li><a href="catalog.html">Sale &amp; Promo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="business.html">Tentang Kami</a></li>
+          <li><a href="#">Panduan Ukuran</a></li>
+          <li><a href="#">Kebijakan Return</a></li>
+          <li><a href="#">Cara Order</a></li>
+          <li><a href="index.html#kontak">Kontak</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hubungi Kami</h4>
+        <ul style="color:rgba(250,248,243,.65);font-size:.88rem;line-height:1.7">
+          <li style="margin-bottom:8px"><strong>Gmail:</strong> syalune.official@gmail.com</li>
+          <li style="margin-bottom:8px"><strong>Kontak:</strong> +62 812-3456-7890</li>
+          <li style="margin-bottom:8px"><strong>Shopee:</strong> Syalune Official Store</li>
+          <li style="margin-bottom:8px"><strong>Instagram:</strong> @syalune.id</li>
+          <li style="margin-bottom:0">Bandung, Jawa Barat, Indonesia</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Syalune. Hak cipta dilindungi.</span>
+      <span>Made with 💚 in Indonesia</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+/* ─── Helpers ─── */
+function updateCartBadge() {
+  const count = Cart.count();
+  document.querySelectorAll(".cart-badge").forEach(b => {
+    b.textContent = count;
+    b.style.display = count > 0 ? "inline-flex" : "none";
+  });
+}
+
+let _toast;
+function showToast(msg) {
+  let t = document.querySelector(".toast");
+  if (!t) { t = document.createElement("div"); t.className = "toast"; document.body.appendChild(t); }
+  t.textContent = msg; void t.offsetWidth; t.classList.add("show");
+  clearTimeout(_toast); _toast = setTimeout(() => t.classList.remove("show"), 2800);
+}
+
+function initReveal() {
+  const els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("visible")); return; }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("visible"); obs.unobserve(en.target); } });
+  }, { threshold: 0.08 });
+  els.forEach(e => obs.observe(e));
+}
+
+/* Navbar */
+const toggle = document.querySelector(".nav-toggle");
+const links  = document.querySelector(".nav-links");
+if (toggle && links) toggle.addEventListener("click", () => links.classList.toggle("open"));
+
+/* Footer year */
+const yr = document.getElementById("year");
+if (yr) yr.textContent = new Date().getFullYear();
+
+/* Search redirect */
+const hs = document.getElementById("hero-search");
+if (hs) hs.addEventListener("keydown", e => {
+  if (e.key === "Enter" && hs.value.trim()) window.location.href = `catalog.html?q=${encodeURIComponent(hs.value.trim())}`;
+});
+
+/* ─── Product card renderer ─── */
+function imgPath(image) { return image.replace("../images/", "images/"); }
+
+function starHTML(rating) {
+  const full = Math.floor(rating);
+  return "★".repeat(full) + (rating % 1 >= 0.5 ? "½" : "");
+}
+
+function renderProductGrid(list, container) {
+  const tagMap = { SALE: "tag-sale", NEW: "tag-new", BEST: "tag-best" };
+  container.innerHTML = list.map(p => {
+    const disc = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+    return `
+    <article class="product-card">
+      <div class="product-thumb">
+        ${p.badge ? `<span class="product-tag ${tagMap[p.badge] || "tag-new"}">${p.badge === "BEST" ? "BEST SELLER" : p.badge}</span>` : ""}
+        <img src="${imgPath(p.image)}" alt="${p.name}" loading="lazy" />
+        <button class="wish-btn" data-wish="${p.id}" aria-label="Wishlist">🤍</button>
+        <div class="product-card-actions">
+          <button class="btn btn-primary btn-sm btn-block" data-add="${p.id}">+ Keranjang</button>
+        </div>
+      </div>
+      <div class="product-body">
+        <span class="product-cat">${p.category.toUpperCase()}</span>
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">
+          <span class="price-now">${formatRupiah(p.price)}</span>
+          ${p.oldPrice ? `<span class="price-old">${formatRupiah(p.oldPrice)}</span><span class="price-disc">-${disc}%</span>` : ""}
+        </div>
+        <div class="product-rating">
+          <span class="stars">${"★".repeat(Math.round(p.rating))}</span>
+          <span class="rating-count">(${p.reviews})</span>
+        </div>
+        <div style="margin-top:.4rem">${colorDotsHTML(p.colors, 4)}</div>
+      </div>
+    </article>`;
+  }).join("");
+
+  container.addEventListener("click", e => {
+    const add  = e.target.closest("[data-add]");
+    const wish = e.target.closest("[data-wish]");
+    if (add) {
+      const pr = getProductById(add.dataset.add);
+      if (pr) { openModal(pr.id); }
+    }
+    if (wish) { wish.textContent = wish.textContent === "🤍" ? "❤️" : "🤍"; showToast("Ditambahkan ke wishlist 💚"); }
+  });
+}
+
+/* ─── Gender tab filter ─── */
+let activeGender = "Semua";
+
+document.getElementById("gender-tabs").addEventListener("click", e => {
+  const btn = e.target.closest(".gender-tab"); if (!btn) return;
+  document.querySelectorAll(".gender-tab").forEach(b => b.classList.toggle("active", b === btn));
+  activeGender = btn.dataset.gender;
+  const list = activeGender === "Semua"
+    ? PRODUCTS
+    : PRODUCTS.filter(p => p.gender === activeGender);
+  renderProductGrid(list, document.getElementById("home-product-grid"));
+});
+
+/* ─── Init ─── */
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartBadge();
+  initReveal();
+  renderProductGrid(PRODUCTS, document.getElementById("home-product-grid"));
+});
+document.addEventListener("cart:change", updateCartBadge);
+</script>
+</body>
+</html>

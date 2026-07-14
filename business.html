@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tentang & Strategi Bisnis — Syalune</title>
+  <meta name="description" content="Tentang Syalune, strategi bisnis e-commerce, analisis pasar, dan model bisnis fashion online Indonesia." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .biz-hero { background: linear-gradient(135deg, var(--lime-faint) 0%, var(--cream) 55%, var(--cream-2) 100%); padding: 4rem 0 3rem; text-align: center; border-bottom: 1px solid var(--cream-3); }
+    .biz-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--bark); margin-bottom: .75rem; }
+    .biz-hero p { color: var(--bark-2); max-width: 580px; margin: 0 auto; font-size: .98rem; }
+    .product-catalog-section { background: var(--cream-2); padding: 4rem 0; }
+    .catalog-tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .catalog-tab { padding: .55rem 1.4rem; border-radius: 999px; border: 2px solid var(--cream-3); background: var(--white); font-size: .88rem; font-weight: 700; cursor: pointer; transition: all .2s; color: var(--bark-2); }
+    .catalog-tab:hover { border-color: var(--lime); color: var(--lime-dark); }
+    .catalog-tab.active { background: var(--lime); border-color: var(--lime); color: var(--bark); }
+    .prod-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .prod-item { background: var(--white); border: 1px solid var(--cream-3); border-radius: var(--r-lg); overflow: hidden; transition: box-shadow .2s, transform .2s; }
+    .prod-item:hover { box-shadow: var(--sh-md); transform: translateY(-3px); }
+    .prod-item-img { aspect-ratio: 3/4; background: var(--lime-faint); overflow: hidden; }
+    .prod-item-img img { width: 100%; height: 100%; object-fit: cover; }
+    .prod-item-body { padding: .75rem 1rem 1rem; }
+    .prod-item-cat { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--lime-dark); margin-bottom: 3px; }
+    .prod-item-name { font-weight: 700; font-size: .9rem; color: var(--bark); margin-bottom: .4rem; line-height: 1.3; }
+    .prod-item-price { font-weight: 800; color: var(--bark); font-size: .95rem; margin-bottom: .4rem; }
+    .prod-item-colors { font-size: .75rem; color: var(--muted); }
+    .prod-item-actions { display: flex; gap: .4rem; margin-top: .6rem; }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-top"> FREE ONGKIR untuk pembelian di atas Rp300.000!</div>
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">Syalune<span class="brand-dot"></span></a>
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="catalog.html">Katalog</a>
+      <a href="business.html" class="active">Tentang</a>
+      <a href="index.html#kontak">Kontak</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn">🛍️ Keranjang <span class="cart-badge" style="display:none">0</span></a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- Biz Hero -->
+<div class="biz-hero">
+  <div class="container">
+    <div class="breadcrumb" style="justify-content:center;display:flex;margin-bottom:1rem"><a href="index.html">Beranda</a> / Tentang &amp; Bisnis</div>
+    <h1>Strategi Bisnis Syalune</h1>
+    <p>Dokumentasi lengkap di balik brand: dari profil bisnis, analisis pasar, model bisnis, strategi pemasaran, katalog produk, hingga proyeksi keuangan.</p>
+  </div>
+</div>
+
+<!-- Katalog Produk -->
+<section class="product-catalog-section">
+  <div class="container">
+    <h2 style="font-family:var(--sans);font-weight:800;font-size:clamp(1.3rem,3vw,1.8rem);margin-bottom:.4rem">Katalog Produk Syalune</h2>
+    <p style="color:var(--bark-2);font-size:.9rem;margin-bottom:1.25rem">10 produk pilihan — 5 koleksi wanita &amp; 5 koleksi pria dengan konsep Korean Fashion.</p>
+    <div class="catalog-tabs" id="biz-tabs">
+      <button class="catalog-tab active" data-filter="Semua">Semua</button>
+      <button class="catalog-tab" data-filter="Wanita">👗 Wanita</button>
+      <button class="catalog-tab" data-filter="Pria">👔 Pria</button>
+    </div>
+    <div class="prod-list" id="biz-prod-list"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container doc">
+
+    <!-- Metrik utama -->
+    <div class="metric-grid reveal" style="margin-bottom:2rem">
+      <div class="metric"><strong>< 45%</strong><span>Bounce Rate</span></div>
+      <div class="metric"><strong>> 2%</strong><span>Conversion Rate</span></div>
+      <div class="metric"><strong>300k-350k</strong><span>Avg. Order Value</span></div>
+      <div class="metric"><strong>< 70%</strong><span>Cart Abandonment</span></div>
+    </div>
+
+    <!-- 1. Profil Bisnis & Value Proposition -->
+    <div class="doc-block reveal">
+      <h2><span class="num">1</span> Profil Bisnis & Value Proposition</h2>
+      <h3>Profil Bisnis</h3>
+      <p>Syalune adalah toko e-commerce yang bergerak di bidang fashion pria dan wanita dengan konsep <strong>Korean Casual, Minimalist</strong>, dan <strong>Streetwear</strong>. Kami menghadirkan berbagai pilihan pakaian yang mengutamakan kualitas, kenyamanan, dan desain yang mengikuti tren fashion masa kini.</p>
+      <p style="margin-top:0.75rem">Syalune berkomitmen untuk memberikan pengalaman berbelanja online yang mudah, aman, dan menyenangkan melalui website yang responsif serta pelayanan pelanggan yang cepat dan ramah.</p>
+      <h3>Value Proposition</h3>
+      <ul class="bullets">
+        <li>Koleksi fashion Korean Style yang selalu mengikuti tren.</li>
+        <li>Bahan berkualitas premium dengan harga yang terjangkau.</li>
+        <li>Pilihan ukuran dan warna yang lengkap.</li>
+        <li>Website yang mudah digunakan.</li>
+        <li>Pelayanan pelanggan yang cepat dan responsif.</li>
+        <li>Pengiriman ke seluruh Indonesia.</li>
+      </ul>
+    </div>
+
+    <!-- 2. Target Market & Segmentasi -->
+    <div class="doc-block reveal">
+      <h2><span class="num">2</span> Target Market & Segmentasi</h2>
+      <h3>Target Market</h3>
+      <p>Syalune menargetkan konsumen yang menyukai fashion modern dengan gaya Korea, terutama remaja hingga dewasa muda yang aktif mengikuti perkembangan tren fashion.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem">
+        <div>
+          <h4>Segmentasi Demografis</h4>
+          <ul class="bullets" style="font-size:.9rem">
+            <li><strong>Usia:</strong> 17–30 tahun</li>
+            <li><strong>Jenis kelamin:</strong> Pria dan wanita</li>
+            <li><strong>Status:</strong> Pelajar, mahasiswa, karyawan, dan masyarakat umum</li>
+            <li><strong>Tingkat pendapatan:</strong> Menengah</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Segmentasi Geografis</h4>
+          <p style="font-size:.9rem;line-height:1.6;color:var(--bark-2)">Target pemasaran mencakup seluruh wilayah Indonesia dengan fokus awal pada kota-kota besar seperti Bandung, Jakarta, Surabaya, Yogyakarta, dan Medan yang memiliki minat tinggi terhadap fashion.</p>
+        </div>
+        <div>
+          <h4>Segmentasi Psikografis</h4>
+          <ul class="bullets" style="font-size:.9rem">
+            <li>Menyukai fashion Korean Style.</li>
+            <li>Mengikuti tren melalui media sosial.</li>
+            <li>Mengutamakan kenyamanan dalam berpakaian.</li>
+            <li>Senang berbelanja secara online.</li>
+            <li>Memiliki gaya hidup aktif dan modern.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Segmentasi Perilaku</h4>
+          <ul class="bullets" style="font-size:.9rem">
+            <li>Sering membeli pakaian secara online.</li>
+            <li>Tertarik pada promo dan diskon.</li>
+            <li>Menyukai produk berkualitas dengan harga terjangkau.</li>
+            <li>Loyal terhadap brand yang memberikan pelayanan baik.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Analisis Pasar & Kompetitor -->
+    <div class="doc-block reveal">
+      <h2><span class="num">3</span> Analisis Pasar & Kompetitor</h2>
+      <h3>Analisis Pasar</h3>
+      <p>Perkembangan industri fashion di Indonesia terus mengalami peningkatan, terutama pada kategori <strong>Korean Fashion</strong> yang semakin diminati karena pengaruh budaya Korea melalui drama, musik, dan media sosial. Konsumen saat ini tidak hanya mencari pakaian yang menarik secara visual, tetapi juga mengutamakan kualitas bahan, kenyamanan, dan kemudahan berbelanja secara online.</p>
+      <p style="margin-top:0.75rem">Melihat kondisi tersebut, Syalune memiliki peluang besar untuk berkembang dengan menghadirkan produk yang sesuai dengan kebutuhan pasar dan mengikuti tren yang sedang populer.</p>
+      <h3>Kompetitor</h3>
+      <p style="margin-bottom:0.75rem;color:var(--bark-2)">Beberapa kompetitor yang bergerak di bidang serupa antara lain: <strong>Berrybenka, This Is April, Erigo, Cotton Ink, Colorbox, H&M, Uniqlo, Zalora.</strong></p>
+      <h3>Keunggulan Kompetitif Syalune</h3>
+      <ul class="bullets">
+        <li>Fokus pada gaya Korean Fashion yang sedang diminati.</li>
+        <li>Koleksi untuk pria dan wanita dalam satu toko.</li>
+        <li>Harga lebih terjangkau dibandingkan beberapa brand internasional.</li>
+        <li>Produk dipilih dengan mempertimbangkan kualitas dan kenyamanan.</li>
+        <li>Tampilan website sederhana dan mudah digunakan.</li>
+      </ul>
+    </div>
+
+    <!-- 4. Strategi Manajemen Produk & Katalog -->
+    <div class="doc-block reveal">
+      <h2><span class="num">4</span> Strategi Manajemen Produk & Katalog</h2>
+      <p>Syalune menerapkan strategi pengelolaan produk yang bertujuan memberikan pengalaman berbelanja yang nyaman bagi pelanggan.</p>
+      <h3>Kategori Produk</h3>
+      <div style="display:flex;gap:2rem;margin-top:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px;background:var(--cream-2);padding:1.5rem;border-radius:var(--r);border:1px solid var(--cream-3)">
+          <h4 style="margin-top:0;color:var(--lime-dark)">👗 Women Collection</h4>
+          <ul class="bullets" style="font-size:.9rem;margin-bottom:0">
+            <li>Cardigan</li>
+            <li>Blouse</li>
+            <li>Dress</li>
+            <li>Rok</li>
+            <li>Outer</li>
+          </ul>
+        </div>
+        <div style="flex:1;min-width:200px;background:var(--cream-2);padding:1.5rem;border-radius:var(--r);border:1px solid var(--cream-3)">
+          <h4 style="margin-top:0;color:var(--lime-dark)">👔 Men Collection</h4>
+          <ul class="bullets" style="font-size:.9rem;margin-bottom:0">
+            <li>Kemeja</li>
+            <li>Hoodie</li>
+            <li>Varsity Jacket</li>
+            <li>Celana</li>
+            <li>Knit Vest</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Informasi Produk</h3>
+      <p>Setiap produk dilengkapi dengan: Foto produk berkualitas tinggi, nama produk, harga, pilihan warna, pilihan ukuran, deskripsi produk, detail bahan, panduan ukuran, cara perawatan, dan informasi stok.</p>
+      <p style="margin-top:0.5rem;font-size:.9rem;color:var(--muted)"><em>Katalog akan diperbarui secara berkala mengikuti tren fashion terbaru dan musim tertentu.</em></p>
+    </div>
+
+    <!-- 5. Model Bisnis & Revenue Stream -->
+    <div class="doc-block reveal">
+      <h2><span class="num">5</span> Model Bisnis & Revenue Stream</h2>
+      <h3>Model Bisnis</h3>
+      <p>Syalune menggunakan model <strong>Business to Customer (B2C)</strong>, yaitu menjual produk secara langsung kepada konsumen melalui website e-commerce tanpa perantara.</p>
+      <h3>Revenue Stream</h3>
+      <p style="margin-bottom:0.75rem">Pendapatan diperoleh dari:</p>
+      <ul class="bullets">
+        <li>Penjualan produk fashion.</li>
+        <li>Paket bundling produk.</li>
+        <li>Promo musiman dan Flash Sale.</li>
+        <li>Voucher belanja.</li>
+        <li>Program membership dengan penawaran khusus.</li>
+        <li>Kolaborasi promosi dengan influencer atau brand lain.</li>
+      </ul>
+    </div>
+
+    <!-- 6. Strategi Harga, Promosi & Diskon -->
+    <div class="doc-block reveal">
+      <h2><span class="num">6</span> Strategi Harga, Promosi & Diskon</h2>
+      <h3>Strategi Harga</h3>
+      <p>Syalune menerapkan <strong>Competitive Pricing</strong>, yaitu menetapkan harga yang kompetitif sesuai kualitas produk agar dapat bersaing di pasar. Contoh kisaran harga:</p>
+      <ul class="bullets">
+        <li>Blouse: <strong>Rp149.000</strong></li>
+        <li>Cardigan: <strong>Rp185.000</strong></li>
+        <li>Dress: <strong>Rp189.000</strong></li>
+        <li>Hoodie: <strong>Rp219.000</strong></li>
+        <li>Varsity Jacket: <strong>Rp249.000</strong></li>
+      </ul>
+      <h3>Strategi Promosi</h3>
+      <ul class="bullets">
+        <li>Grand Opening Sale & Flash Sale.</li>
+        <li>Promo Payday & Promo Hari Raya / Harbolnas.</li>
+        <li>Gratis ongkir dengan minimum pembelian.</li>
+        <li>Voucher pelanggan baru & Program referral pelanggan.</li>
+      </ul>
+      <p style="margin-top:1rem;color:var(--bark-2);font-size:.9rem"><strong>Media promosi yang digunakan:</strong> Instagram, TikTok, Facebook, Website, dan Marketplace.</p>
+    </div>
+
+    <!-- 7. Proses Checkout & Payment Gateway -->
+    <div class="doc-block reveal">
+      <h2><span class="num">7</span> Proses Checkout & Payment Gateway</h2>
+      <p>Proses checkout pada Syalune dirancang sederhana dan efisien agar pelanggan dapat menyelesaikan transaksi dengan mudah.</p>
+      <div style="background:var(--lime-faint);padding:1rem;border-radius:var(--r);border:1px dashed var(--lime);margin:1.5rem 0;text-align:center;font-weight:700;color:var(--lime-dark)">
+        Keranjang Belanja ➔ Data Pengiriman ➔ Pilih Metode Pembayaran ➔ Konfirmasi Pesanan
+      </div>
+      <p>Untuk sistem pembayaran, Syalune menggunakan <strong>Midtrans</strong> sebagai payment gateway. Midtrans dipilih karena merupakan salah satu layanan pembayaran yang banyak digunakan di Indonesia dan mendukung berbagai metode pembayaran dalam satu integrasi, seperti Virtual Account (BCA, BNI, BRI, Mandiri), QRIS, e-wallet (GoPay, OVO, DANA, ShopeePay), serta kartu kredit dan debit.</p>
+      <p style="margin-top:0.75rem;font-size:.9rem;color:var(--muted)"><em>Pada website prototype ini, proses pembayaran masih menggunakan mode simulasi (demo), sehingga setelah pelanggan menekan tombol "Bayar", sistem akan menampilkan proses pembayaran (loading) yang kemudian dilanjutkan dengan notifikasi pembayaran berhasil beserta nomor pesanan, tanpa melakukan transaksi keuangan secara nyata.</em></p>
+    </div>
+
+    <!-- 8. Rencana SEO, Keamanan & Pemeliharaan -->
+    <div class="doc-block reveal">
+      <h2><span class="num">8</span> Rencana SEO, Keamanan & Pemeliharaan</h2>
+      <h3>Search Engine Optimization (SEO)</h3>
+      <ul class="bullets">
+        <li>Penggunaan kata kunci seperti Korean Fashion, Fashion Pria, Fashion Wanita, dan Outfit Korean Style.</li>
+        <li>Optimasi judul halaman dan meta description.</li>
+        <li>Penggunaan URL yang sederhana dan mudah dibaca.</li>
+        <li>Optimasi gambar menggunakan atribut alt text.</li>
+        <li>Website yang responsif untuk perangkat desktop maupun mobile.</li>
+      </ul>
+      <h3>Keamanan Website</h3>
+      <ul class="bullets">
+        <li>HTTPS/SSL Certificate.</li>
+        <li>Validasi data pada formulir.</li>
+        <li>Login akun pelanggan yang aman & Perlindungan data pribadi pelanggan.</li>
+        <li>Backup database secara berkala.</li>
+      </ul>
+      <h3>Pemeliharaan Website</h3>
+      <ul class="bullets">
+        <li>Memperbarui katalog produk secara rutin & menambahkan koleksi terbaru sesuai tren.</li>
+        <li>Memperbaiki bug dan error sistem.</li>
+        <li>Memastikan seluruh fitur website berjalan dengan baik.</li>
+        <li>Melakukan backup data secara berkala.</li>
+      </ul>
+    </div>
+
+    <!-- 9. Rencana Penggunaan Data Analytics -->
+    <div class="doc-block reveal">
+      <h2><span class="num">9</span> Rencana Penggunaan Data Analytics</h2>
+      <p>Website <strong>Syalune</strong> direncanakan terintegrasi dengan <strong>Google Analytics 4 (GA4)</strong> untuk memantau aktivitas pengunjung dan mengevaluasi performa website. Selain itu, digunakan beberapa <strong>event tracking</strong> seperti <code style="background:var(--cream-2);padding:2px 6px;border-radius:4px;font-size:.85rem">view_item</code>, <code style="background:var(--cream-2);padding:2px 6px;border-radius:4px;font-size:.85rem">add_to_cart</code>, <code style="background:var(--cream-2);padding:2px 6px;border-radius:4px;font-size:.85rem">begin_checkout</code>, dan <code style="background:var(--cream-2);padding:2px 6px;border-radius:4px;font-size:.85rem">purchase</code> untuk mengetahui perjalanan pelanggan mulai dari melihat produk hingga menyelesaikan pembelian.</p>
+      
+      <h3 style="margin-top:2rem">Metrik Utama yang Dipantau</h3>
+      <table class="data-table" style="margin-top:1rem">
+        <thead>
+          <tr>
+            <th style="width:50%">Metrik</th>
+            <th style="width:50%">Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bounce Rate</td>
+            <td>&lt; 45%</td>
+          </tr>
+          <tr>
+            <td>Conversion Rate</td>
+            <td>&gt; 2%</td>
+          </tr>
+          <tr>
+            <td>Average Order Value</td>
+            <td>Rp300.000–Rp350.000</td>
+          </tr>
+          <tr>
+            <td>Cart Abandonment Rate</td>
+            <td>&lt; 70%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:2rem">Pemanfaatan Data untuk Pengambilan Keputusan</h3>
+      <ul class="bullets">
+        <li>Produk terlaris digunakan sebagai acuan untuk menentukan produk yang perlu ditambah stoknya serta ditampilkan pada halaman utama sebagai produk unggulan.</li>
+        <li>Data proses checkout dianalisis untuk mengetahui pada tahap mana pelanggan sering membatalkan pembelian, sehingga alur checkout dapat disederhanakan agar lebih mudah digunakan.</li>
+        <li>Sumber trafik (Instagram, TikTok, Google Search, atau media lainnya) digunakan untuk mengevaluasi efektivitas strategi pemasaran dan menentukan media promosi yang paling memberikan hasil.</li>
+        <li>Perilaku pengguna pada perangkat mobile dan desktop dianalisis untuk meningkatkan tampilan serta kenyamanan website pada perangkat yang paling banyak digunakan pelanggan.</li>
+        <li>Produk yang sering ditambahkan ke keranjang tetapi tidak dibeli akan dievaluasi dengan memberikan promo, diskon, atau penyesuaian harga untuk meningkatkan peluang terjadinya transaksi.</li>
+      </ul>
+      <p style="margin-top:1.5rem;padding:1.2rem;background:var(--cream-2);border-left:4px solid var(--lime);border-radius:4px;font-size:.95rem;line-height:1.6">Dengan memanfaatkan data analytics, Syalune dapat mengambil keputusan bisnis berdasarkan data sehingga strategi pemasaran, pengelolaan produk, dan pengalaman pelanggan dapat terus ditingkatkan.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© <span id="year"></span> Syalune. Hak cipta dilindungi.</span>
+      <span><a href="index.html" style="color:var(--lime)">← Kembali ke Beranda</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+function updateCartBadge() {
+  const c = Cart.count();
+  document.querySelectorAll(".cart-badge").forEach(b => { b.textContent = c; b.style.display = c > 0 ? "inline-flex" : "none"; });
+}
+const tog = document.querySelector(".nav-toggle"), nls = document.querySelector(".nav-links");
+if (tog && nls) tog.addEventListener("click", () => nls.classList.toggle("open"));
+const els = document.querySelectorAll(".reveal");
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("visible"); obs.unobserve(en.target); } });
+}, { threshold: 0.08 });
+els.forEach(e => obs.observe(e));
+
+/* Catalog mini */
+let bizFilter = "Semua";
+function renderBizCatalog() {
+  const list = bizFilter === "Semua" ? PRODUCTS : PRODUCTS.filter(p => p.gender === bizFilter);
+  const grid = document.getElementById("biz-prod-list");
+  grid.innerHTML = list.map(p => {
+    const imgSrc = p.image.replace("../images/","images/");
+    const badge = p.badge ? `<span class="product-tag ${p.badge==="SALE"?"tag-sale":p.badge==="BEST"?"tag-best":"tag-new"}" style="position:relative;top:auto;left:auto;margin-bottom:.4rem;display:inline-block">${p.badge==="BEST"?"BEST SELLER":p.badge}</span>` : "";
+    const colorsText = p.colors.join(" · ");
+    return `
+    <div class="prod-item">
+      <div class="prod-item-img"><img src="${imgSrc}" alt="${p.name}" loading="lazy"/></div>
+      <div class="prod-item-body">
+        ${badge}
+        <div class="prod-item-cat">${p.category}</div>
+        <div class="prod-item-name">${p.name}</div>
+        <div class="prod-item-price">${formatRupiah(p.price)}${p.oldPrice?` <span style="font-size:.78rem;font-weight:400;color:var(--muted);text-decoration:line-through">${formatRupiah(p.oldPrice)}</span>`:""}</div>
+        ${colorDotsHTML(p.colors, 4)}
+        <div class="prod-item-actions">
+          <a href="catalog.html" class="btn btn-ghost btn-sm" style="flex:1;text-align:center">Detail</a>
+          <button class="btn btn-primary btn-sm" data-biz-add="${p.id}" style="flex:1">+ Keranjang</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+document.getElementById("biz-tabs").addEventListener("click", e => {
+  const btn = e.target.closest(".catalog-tab"); if (!btn) return;
+  document.querySelectorAll(".catalog-tab").forEach(b => b.classList.toggle("active", b === btn));
+  bizFilter = btn.dataset.filter; renderBizCatalog();
+});
+document.getElementById("biz-prod-list").addEventListener("click", e => {
+  const b = e.target.closest("[data-biz-add]"); if (!b) return;
+  const p = getProductById(b.dataset.bizAdd); if (!p) return;
+  openModal(p.id);
+});
+document.addEventListener("DOMContentLoaded", () => { updateCartBadge(); renderBizCatalog(); });
+document.addEventListener("cart:change", updateCartBadge);
+</script>
+</body>
+</html>
