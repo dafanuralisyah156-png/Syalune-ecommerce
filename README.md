@@ -1,5 +1,20 @@
 # Business Overview - Syalune
 
+## Daftar Isi
+1. [Profil Bisnis & Value Proposition](#1-profil-bisnis--value-proposition)
+2. [Target Market & Segmentasi](#2-target-market--segmentasi)
+3. [Analisis Pasar & Kompetitor](#3-analisis-pasar--kompetitor)
+4. [Strategi Manajemen Produk & Katalog](#4-strategi-manajemen-produk--katalog)
+5. [Model Bisnis & Revenue Stream](#5-model-bisnis--revenue-stream)
+6. [Strategi Harga, Promosi & Diskon](#6-strategi-harga-promosi--diskon)
+7. [Proses Checkout & Payment Gateway](#7-proses-checkout--payment-gateway)
+8. [Rencana SEO, Keamanan & Pemeliharaan](#8-rencana-seo-keamanan--pemeliharaan)
+9. [Rencana Penggunaan Data Analytics](#9-rencana-penggunaan-data-analytics)
+10. [Struktur Folder](#10-struktur-folder)
+11. [Cara Menjalankan Website](#11-cara-menjalankan-website)
+12. [Fitur Teknis Website](#12-fitur-teknis-website)
+13. [Deployment ke GitHub Pages](#13-deployment-ke-github-pages)
+
 ## 1. Profil Bisnis & Value Proposition
 **Syalune** adalah toko e-commerce yang bergerak di bidang fashion pria dan wanita dengan konsep Korean Casual, Minimalist, dan Streetwear. Kami menghadirkan berbagai pilihan pakaian yang mengutamakan kualitas, kenyamanan, dan desain yang mengikuti tren fashion masa kini.
 Syalune berkomitmen untuk memberikan pengalaman berbelanja online yang mudah, aman, dan menyenangkan melalui website yang responsif serta pelayanan pelanggan yang cepat dan ramah.
